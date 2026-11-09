@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แผนที่ภายในวิทยาลัย — วิทยาลัยเทคนิคนางรอง</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- เพิ่ม FontAwesome CDN สำหรับแสดงไอคอน -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- เรียกใช้ CSS หลัก และ CSS เฉพาะหน้าแผนที่ -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="location.css">
+</head>
+<body>
+
+    <!-- ==========================================
+         ส่วนหัวเว็บไซต์ (NAVBAR)
+    =========================================== -->
+    <header class="navbar" id="navbar"> 
+        <div class="container nav-inner">
+            <a href="index.html" class="brand">
+                <!-- โลโก้วิทยาลัย -->
+                <img src="png/347808514_922570995522506_7562302296508415171_n.jpg" alt="ตราสัญลักษณ์วิทยาลัยเทคนิคนางรอง" class="brand-logo">
+                <div class="brand-title">
+                    <h1>วิทยาลัยเทคนิคนางรอง</h1>
+                    <small>NANGRONG TECHNICAL COLLEGE</small>
+                </div>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="เปิดเมนู">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav class="nav-links" id="navLinks">
+                <ul>
+                    <li><a href="index.html">หน้าหลัก</a></li>
+                    <li><a href="index.html#about">ประวัติ</a></li>
+                    <li><a href="index.html#departments">แผนกวิชา</a></li>
+                    <li><a href="index.html#spaces">หมวดหมู่สถานที่</a></li>
+                    <li><a href="index.html#gallery">ภาพกิจกรรม</a></li>
+                    <li><a href="location.html" class="active">แผนที่วิทยาลัย</a></li>
+                    <li><a href="https://web.facebook.com/NrTechNew" class="nav-contact">ติดต่อ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         ส่วนเนื้อหาหน้าแผนที่ (INTERACTIVE CAMPUS MAP)
+    =========================================== -->
+    <main class="map-page">
+        <div class="container">
+            <div class="map-header">
+                <div>
+                    <span class="num-index">CAMPUS DIRECTORY & MAP</span>
+                    <h2>แผนผังและจุดสำคัญภายในวิทยาลัย</h2>
+                </div>
+                <p class="map-hint">คลิกที่รายชื่ออาคารด้านซ้าย หรือกดที่หมุดหมายเลขบนแผนที่เพื่อดูรายละเอียด</p>
+            </div>
+
+            <div class="map-workspace">
+                <!-- แถบรายชื่ออาคารด้านซ้าย (Sidebar) -->
+                <aside class="map-sidebar">
+                    <div class="search-box">
+                        <input type="text" id="buildingSearch" placeholder="ค้นหาชื่ออาคาร, แผนกวิชา, โรงอาหาร...">
+                        <!-- เปลี่ยนเป็นไอคอนแว่นขยายจาก FontAwesome -->
+                        <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    </div>
+
+                    <div class="building-list" id="buildingList">
+                        <!-- รายการอาคารจะถูกสร้างอัตโนมัติจากไฟล์ location.js -->
+                    </div>
+                </aside>
+
+                <!-- พื้นที่แสดงรูปภาพแผนผังและหมุดปัก -->
+                <div class="map-canvas-wrapper">
+                    <div class="map-canvas" id="mapCanvas">
+                        <img src="png/891926211_1381713360704935_8120403571528401561_n.jpg" alt="แผนผังวิทยาลัยเทคนิคนางรอง" id="campusImage">
+                        <div id="pinsLayer"></div>
+                    </div>
+
+                    <!-- กล่องแสดงรายละเอียดอาคารเมื่อเลือก -->
+                    <div class="info-popup" id="infoPopup">
+                        <!-- เปลี่ยนปุ่มปิดเป็นไอคอนกากบาทจาก FontAwesome -->
+                        <button class="popup-close" id="popupClose"><i class="fa-solid fa-xmark"></i></button>
+                        <div class="popup-badge" id="popupCode">จุดที่ 01</div>
+                        <h3 id="popupTitle">ชื่ออาคาร</h3>
+                        <p id="popupDesc">รายละเอียดการใช้งานของอาคาร</p>
+                        <a href="#" id="popupLink" class="popup-btn">ดูรายละเอียดสถานที่เพิ่มเติม &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ==========================================
+         ส่วนท้ายเว็บไซต์ (FOOTER)
+    =========================================== -->
+    <footer class="footer">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 วิทยาลัยเทคนิคนางรอง (Nangrong Technical College)</p>
+            <p>โทร. 044-631556 &bull; nricec@yahoo.com </p>
+        </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+
+    // 1. ฐานข้อมูลอาคารและพิกัดบนรูปภาพ (อ้างอิงจากตำแหน่งจริงในรูปถ่ายทางอากาศ)
+    const buildingsData = [
+        { id: 1, name: "ประตูทางเข้า-ออกหลัก", category: "จุดบริการ", desc: "ประตูทางเข้าหลักด้านหน้าวิทยาลัย ติดถนนโชคชัย-เดชอุดม", top: 86, left: 62 },
+        { id: 2, name: "โดมอเนกประสงค์ (หลังเก่า)", category: "ลานกิจกรรม", desc: "พื้นที่จัดกิจกรรมเข้าแถวหน้าเสาธง และกิจกรรมกีฬาในร่ม", top: 64, left: 49 },
+        { id: 3, name: "อาคาร 4", category: "อาคารเรียน", desc: "อาคารเรียนและห้องปฏิบัติการประจำแผนกวิชา", top: 55, left: 20 },
+        { id: 4, name: "อาคารอำนวยการ", category: "งานบริหาร", desc: "ศูนย์รวมงานบริหาร งานทะเบียน งานการเงิน และห้องผู้บริหาร", top: 47, left: 26 },
+        { id: 5, name: "อาคาร 1 (หอประชุมและสำนักงาน)", category: "อาคารเรียน / สำนักงาน", desc: "หอประชุมวิทยาลัยและสำนักงานฝ่ายบริหารทรัพยากร", top: 43, left: 48 },
+        { id: 6, name: "ห้องพยาบาล", category: "สวัสดิการ", desc: "บริการปฐมพยาบาลเบื้องต้นและดูแลสุขภาพนักศึกษา", top: 37, left: 54 },
+        { id: 7, name: "แผนกวิชาโยธา", category: "แผนกวิชา", desc: "อาคารเรียนและโรงฝึกปฏิบัติการแผนกวิชาช่างโยธา", top: 35, left: 48 },
+        { id: 8, name: "อาคารวิทยบริการและห้องสมุด", category: "สวัสดิการ", desc: "ห้องสมุดกลาง ศูนย์สืบค้นข้อมูลและเทคโนโลยีสารสนเทศ", top: 29, left: 54 },
+        { id: 9, name: "คูหาลูกเสือ", category: "กิจกรรม", desc: "พื้นที่กิจกรรมลูกเสือวิสามัญและนักศึกษาวิชาทหาร", top: 24, left: 48 },
+        { id: 10, name: "โดมอเนกประสงค์ (หลังใหม่)", category: "ลานกิจกรรม", desc: "อาคารโดมเอนกประสงค์สำหรับจัดกิจกรรมขนาดใหญ่", top: 24, left: 54 },
+        { id: 11, name: "สนามฟุตบอล", category: "สนามกีฬา", desc: "สนามกีฬากลางแจ้งสำหรับการเรียนพลศึกษาและแข่งขันกีฬา", top: 17, left: 56 },
+        { id: 12, name: "อาคาร 11 และ อาคารเฉลิมพระเกียรติฯ", category: "อาคารเรียน", desc: "อาคารเรียนรวมและห้องปฏิบัติการทางวิชาชีพ", top: 21, left: 68 },
+        { id: 13, name: "แผนกวิชาช่างเชื่อม และ ช่างกลโรงงาน", category: "แผนกวิชา", desc: "โรงฝึกงานปฏิบัติการช่างเชื่อมโลหะและช่างกลโรงงาน", top: 30, left: 67 },
+        { id: 14, name: "อาคารแพงพวย และ โรงอาหาร", category: "สวัสดิการ", desc: "ศูนย์อาหารและร้านค้าสวัสดิการสำหรับนักศึกษาและบุคลากร", top: 38, left: 67 },
+        { id: 15, name: "อาคาร 2 และ แผนกวิชาการโรงแรม", category: "อาคารเรียน / แผนกวิชา", desc: "อาคารเรียนและห้องปฏิบัติการสาขาวิชาการโรงแรม", top: 54, left: 71 },
+        { id: 16, name: "ร้านค้าสหการ", category: "สวัสดิการ", desc: "จำหน่ายอุปกรณ์การเรียน เครื่องเขียน และเครื่องแบบนักศึกษา", top: 76, left: 71 },
+        { id: 17, name: "โรงจอดรถจักรยานยนต์", category: "สิ่งอำนวยความสะดวก", desc: "พื้นที่จอดรถจักรยานยนต์สำหรับนักศึกษา", top: 82, left: 81 }
+    ];
+
+    const buildingListEl = document.getElementById('buildingList');
+    const pinsLayerEl = document.getElementById('pinsLayer');
+    const searchInput = document.getElementById('buildingSearch');
+    
+    const infoPopup = document.getElementById('infoPopup');
+    const popupClose = document.getElementById('popupClose');
+    const popupCode = document.getElementById('popupCode');
+    const popupTitle = document.getElementById('popupTitle');
+    const popupDesc = document.getElementById('popupDesc');
+    const popupLink = document.getElementById('popupLink');
+
+    // 2. ฟังก์ชันสร้างรายการด้านซ้าย และจุดหมุดบนแผนที่
+    function renderMapElements(filterText = '') {
+        buildingListEl.innerHTML = '';
+        pinsLayerEl.innerHTML = '';
+
+        const filteredData = buildingsData.filter(item => 
+            item.name.toLowerCase().includes(filterText.toLowerCase()) ||
+            item.category.toLowerCase().includes(filterText.toLowerCase())
+        );
+
+        filteredData.forEach(item => {
+            // สร้างรายการใน Sidebar
+            const listItem = document.createElement('div');
+            listItem.className = 'b-item';
+            listItem.setAttribute('data-id', item.id);
+            listItem.innerHTML = `
+                <div class="b-num">${item.id}</div>
+                <div class="b-text">
+                    <h4>${item.name}</h4>
+                    <small>${item.category}</small>
+                </div>
+            `;
+            listItem.addEventListener('click', () => selectBuilding(item.id));
+            buildingListEl.appendChild(listItem);
+
+            // สร้างหมุดบนรูปภาพแผนที่
+            const pin = document.createElement('div');
+            pin.className = 'map-pin';
+            pin.setAttribute('data-id', item.id);
+            pin.style.top = `${item.top}%`;
+            pin.style.left = `${item.left}%`;
+            pin.textContent = item.id;
+            pin.title = item.name;
+            pin.addEventListener('click', () => selectBuilding(item.id));
+            pinsLayerEl.appendChild(pin);
+        });
+    }
+
+    // 3. ฟังก์ชันเมื่อคลิกเลือกอาคาร (ไฮไลต์ทั้งรายชื่อและหมุด + เปิด Popup)
+    function selectBuilding(id) {
+        const selected = buildingsData.find(b => b.id === id);
+        if (!selected) return;
+
+        // ลบ active เดิมทั้งหมด
+        document.querySelectorAll('.b-item').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.map-pin').forEach(el => el.classList.remove('active'));
+
+        // ใส่ active ให้ตัวที่เลือก
+        const activeListItem = document.querySelector(`.b-item[data-id="${id}"]`);
+        const activePin = document.querySelector(`.map-pin[data-id="${id}"]`);
+
+        if (activeListItem) {
+            activeListItem.classList.add('active');
+            activeListItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        if (activePin) {
+            activePin.classList.add('active');
+        }
+
+        // อัปเดตข้อมูลและแสดงกล่อง Popup
+        popupCode.textContent = `จุดที่ ${selected.id} • ${selected.category}`;
+        popupTitle.textContent = selected.name;
+        popupDesc.textContent = selected.desc;
+        popupLink.href = `detail.html?id=${selected.id}`;
+        infoPopup.classList.add('show');
+    }
+
+    // 4. ระบบค้นหาแบบ Real-time
+    searchInput.addEventListener('input', (e) => {
+        renderMapElements(e.target.value);
+        infoPopup.classList.remove('show');
+    });
+
+    // 5. ปิดกล่อง Popup
+    popupClose.addEventListener('click', () => {
+        infoPopup.classList.remove('show');
+        document.querySelectorAll('.b-item').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.map-pin').forEach(el => el.classList.remove('active'));
+    });
+
+    // 6. เปิด-ปิดเมนูมือถือ (เผื่อกดบนจอเล็ก)
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+    }
+
+    // เริ่มต้นทำงานแสดงข้อมูลทั้งหมด
+    renderMapElements();
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายละเอียดสถานที่ — วิทยาลัยเทคนิคนางรอง</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome สำหรับไอคอน -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS หลัก และ CSS เฉพาะหน้ารายละเอียด -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="detail.css">
+</head>
+<body>
+
+    <!-- ==========================================
+         ส่วนหัวเว็บไซต์ (NAVBAR)
+    =========================================== -->
+    <header class="navbar" id="navbar">
+        <div class="container nav-inner">
+            <a href="index.html" class="brand">
+                <img src="png/347808514_922570995522506_7562302296508415171_n.jpg" alt="ตราสัญลักษณ์วิทยาลัย" class="brand-logo">
+                <div class="brand-title">
+                    <h1>วิทยาลัยเทคนิคนางรอง</h1>
+                    <small>NANGRONG TECHNICAL COLLEGE</small>
+                </div>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="เปิดเมนู">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav class="nav-links" id="navLinks">
+                <ul>
+                    <li><a href="index.html">หน้าหลัก</a></li>
+                    <li><a href="index.html#about">ประวัติ</a></li>
+                    <li><a href="index.html#departments">แผนกวิชา</a></li>
+                    <li><a href="location.html">แผนที่วิทยาลัย</a></li>
+                    <li><a href="index.html#contact" class="nav-contact">ติดต่อ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         ส่วนเนื้อหารายละเอียดสถานที่ (MAIN CONTENT)
+    =========================================== -->
+    <main class="detail-page">
+        <div class="container">
+            <!-- ปุ่มย้อนกลับกลับสู่ส่วนสถานที่สำคัญในหน้าแรก -->
+            <div class="detail-nav-top">
+                <a href="index.html#spaces" class="back-btn"><i class="fa-solid fa-arrow-left"></i> กลับสู่หน้าสถานที่สำคัญ</a>
+            </div>
+
+            <!-- ส่วนหัวข้อและข้อมูลหลัก -->
+            <div class="detail-header">
+                <div class="detail-meta-info">
+                    <span class="detail-badge" id="placeCategory">หมวดหมู่</span>
+                    <span class="detail-code" id="placeCode">อาคาร --</span>
+                </div>
+                <h2 id="placeTitle">กำลังโหลดข้อมูลสถานที่...</h2>
+            </div>
+
+            <!-- ภาพประกอบขนาดใหญ่ -->
+            <div class="detail-hero-img">
+                <img src="" alt="ภาพสถานที่" id="placeImage">
+            </div>
+
+            <!-- เนื้อหาและรายละเอียดเชิงลึก -->
+            <div class="detail-grid">
+                <div class="detail-main-content">
+                    <h3>เกี่ยวกับสถานที่นี้</h3>
+                    <p id="placeDescription">กำลังดึงข้อมูลรายละเอียด...</p>
+                    
+                    <h3 class="mt-4">สิ่งอำนวยความสะดวกและบริการภายใน</h3>
+                    <ul class="feature-list" id="placeFeatures">
+                        <!-- รายการสิ่งอำนวยความสะดวกจะแสดงผลผ่าน JS -->
+                    </ul>
+                </div>
+
+                <!-- กล่องSidebar ข้อมูลติดต่อ/บริการด่วน -->
+                <div class="detail-sidebar">
+                    <div class="sidebar-box">
+                        <h4>ต้องการความช่วยเหลือ?</h4>
+                        <p>หากต้องการติดต่อสอบถามข้อมูลเพิ่มเติมเกี่ยวกับอาคารหรือแผนกวิชาดังกล่าว สามารถติดต่อได้ที่งานประชาสัมพันธ์</p>
+                        <a href="index.html#contact" class="sidebar-btn"><i class="fa-solid fa-phone"></i> ติดต่อหน่วยงาน</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ==========================================
+         ส่วนท้ายเว็บไซต์ (FOOTER)
+    =========================================== -->
+    <footer class="footer">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 วิทยาลัยเทคนิคนางรอง (Nangrong Technical College)</p>
+            <p>โทร. 044-631556 &bull; nricec@yahoo.com </p>
+        </div>
+    </footer>
+
+    <!-- เรียกใช้ JavaScript สำหรับดึงข้อมูลตาม ID -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    // ฐานข้อมูลสถานที่สำคัญทั้ง 3 แห่ง (สอดคล้องกับ id=1, 2, 3)
+    const placesData = [
+        {
+            id: 1,
+            code: "อาคาร 01",
+            name: "อาคารอำนวยการ",
+            category: "งานบริหาร",
+            image: "png/143419229_2169568823174043_3364154836977827103_n.jpg",
+            desc: "ศูนย์รวมงานบริหาร งานทะเบียน วัดผล และบริการข้อมูลสำหรับนักศึกษา บุคลากร และผู้ที่มาติดต่อราชการ เป็นศูนย์กลางในการประสานงานและอำนวยความสะดวกด้านเอกสารทางการศึกษาทุกประเภทของวิทยาลัยเทคนิคนางรอง",
+            features: [
+                "งานทะเบียนและวัดผล (ขอใบรับรองผลการเรียน, ลงทะเบียนเรียน)",
+                "งานการเงิน บัญชี และพัสดุ",
+                "ฝ่ายบริหารทรัพยากร และฝ่ายวิชาการ",
+                "จุดประชาสัมพันธ์และให้คำปรึกษาสำหรับนักศึกษาใหม่และผู้ปกครอง",
+                "ห้องประชุมและห้องรับรองผู้บริหาร"
+            ]
+        },
+        {
+            id: 2,
+            code: "อาคาร 02",
+            name: "อาคารปฏิบัติการ",
+            category: "ปฏิบัติการ",
+            image: "png/สกรีนช็อต 2026-11-09 213713.png",
+            desc: "พื้นที่ฝึกทักษะปฏิบัติการทางวิชาชีพ พร้อมเครื่องมือและเครื่องจักรกลระดับมาตรฐานอุตสาหกรรม ออกแบบมาเพื่อรองรับการเรียนรู้แบบลงมือปฏิบัติจริง (Hands-on Experience) ตามหลักสูตรอาชีวศึกษา",
+            features: [
+                "โรงฝึกงานและห้องปฏิบัติการเครื่องมือช่างมาตรฐาน",
+                "อุปกรณ์การเรียนการสอนและชุดฝึกทักษะเฉพาะทางที่ทันสมัย",
+                "ระบบความปลอดภัยและอุปกรณ์ป้องกันอันตรายส่วนบุคคล (PPE)",
+                "พื้นที่จัดแสดงผลงานสิ่งประดิษฐ์และนวัตกรรมของนักศึกษา"
+            ]
+        },
+        {
+            id: 3,
+            code: "อาคาร 03",
+            name: "ศูนย์วิทยบริการและห้องสมุด",
+            category: "สวัสดิการ",
+            image: "png/20261109_130855(1).jpg",
+            desc: "แหล่งค้นคว้าตำราวิชาการ บริการคอมพิวเตอร์ และพื้นที่อ่านหนังสือที่เงียบสงบ ทันสมัย เพื่อส่งเสริมการเรียนรู้ตลอดชีวิตและการสืบค้นข้อมูลดิจิทัลสำหรับนักศึกษาและคณาจารย์",
+            features: [
+                "บริการยืม-คืนหนังสือ ตำราวิชาการ วารสาร และสิ่งพิมพ์",
+                "มุมบริการคอมพิวเตอร์พร้อมอินเทอร์เน็ตความเร็วสูงสำหรับสืบค้นข้อมูล",
+                "พื้นที่อ่านหนังสือและมุมนั่งทำงานกลุ่ม (Co-working Space) ปรับอากาศ",
+                "ระบบฐานข้อมูลดิจิทัลและสื่อการเรียนรู้ออนไลน์ (E-Library)"
+            ]
+        }
+    ];
+
+    // ดึงค่า id จาก URL (เช่น detail.html?id=1)
+    const urlParams = new URLSearchParams(window.location.search);
+    const placeId = parseInt(urlParams.get('id')) || 1;
+
+    // ค้นหาข้อมูลสถานที่จาก ID
+    const place = placesData.find(p => p.id === placeId) || placesData[0];
+
+    // อัปเดตชื่อแท็บเบราว์เซอร์
+    document.title = `${place.name} — วิทยาลัยเทคนิคนางรอง`;
+
+    // นำข้อมูลไปแสดงผลในหน้า HTML
+    document.getElementById('placeCode').textContent = place.code;
+    document.getElementById('placeCategory').textContent = place.category;
+    document.getElementById('placeTitle').textContent = place.name;
+    document.getElementById('placeDescription').textContent = place.desc;
+    
+    const imgEl = document.getElementById('placeImage');
+    imgEl.src = place.image;
+    imgEl.alt = place.name;
+
+    // เติมรายการสิ่งอำนวยความสะดวก
+    const featuresListEl = document.getElementById('placeFeatures');
+    featuresListEl.innerHTML = '';
+    place.features.forEach(feature => {
+        const li = document.createElement('li');
+        li.innerHTML = `<i class="fa-solid fa-check"></i> ${feature}`;
+        featuresListEl.appendChild(li);
+    });
+
+    // เปิด-ปิดเมนูบนมือถือ
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+    }
+});
+    </script>
+</body>
+</html>
