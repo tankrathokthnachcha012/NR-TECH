@@ -266,43 +266,108 @@ img {
     border-color: var(--red-main);
 }
 
-.visual-card {
-    position: relative;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    padding: 16px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+/* ==========================================
+   MINIMALIST EDITORIAL INDEX (โปร่ง ไม่มีกรอบหน้าต่าง)
+========================================== */
+.minimal-index-list {
+    padding-left: 24px;
+    border-left: 1px solid rgba(158, 27, 27, 0.25); /* เส้นตั้งบางๆ แบ่งสัดส่วนซ้าย-ขวา */
+    max-width: 440px;
+    margin-left: auto;
 }
 
-.visual-card img {
-    width: 100%;
-    border-radius: 4px;
-    object-fit: cover;
-}
-
-.visual-caption {
+.index-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 14px;
-    margin-top: 12px;
-    padding-top: 10px;
-    border-top: 1px solid var(--line);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 8px;
 }
 
-.visual-caption span {
-    font-family: var(--font-en);
-    font-style: italic;
-    font-size: 1.2rem;
+.index-header span {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2px;
     color: var(--red-main);
 }
 
-.visual-caption p {
-    font-size: 0.85rem;
-    color: var(--ink);
+.index-header small {
+    font-size: 0.78rem;
+    color: var(--muted);
 }
 
+.index-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.index-items li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.index-items a {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 8px;
+    transition: all 0.25s var(--ease);
+}
+
+.index-items a:hover {
+    padding-left: 16px;
+    background-color: rgba(255, 255, 255, 0.55); /* ไฮไลต์ขาวโปร่งบางๆ ตอนเอาเมาส์ชี้ */
+}
+
+.idx-num {
+    font-family: var(--font-en);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--red-main);
+    font-weight: 600;
+}
+
+.idx-info strong {
+    display: block;
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    transition: color 0.25s;
+}
+
+.index-items a:hover .idx-info strong {
+    color: var(--red-main);
+}
+
+.idx-info span {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 300;
+}
+
+.idx-arrow {
+    margin-left: auto;
+    font-size: 1rem;
+    color: var(--muted);
+    transition: all 0.25s ease;
+}
+
+.index-items a:hover .idx-arrow {
+    color: var(--red-main);
+    transform: translateX(4px);
+}
+
+/* ปรับการแสดงผลบนจอมือถือ/แท็บเล็ต */
+@media (max-width: 1024px) {
+    .minimal-index-list {
+        max-width: 100%;
+        margin-left: 0;
+        padding-left: 0;
+        border-left: none;
+        margin-top: 16px;
+    }
+}
 /* ==========================================
    4. MARQUEE TICKER
 ========================================== */
@@ -754,4 +819,34 @@ img {
         grid-column: 2;
         width: fit-content;
     }
+}
+/* ==========================================
+   BRAND LOGO STYLING
+========================================== */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.brand-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    border-radius: 50%; /* ทำขอบให้มนกลม (หากโลโก้เป็นวงกลม) หรือเอาออกได้ครับ */
+}
+
+.brand-title h1 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.2;
+}
+
+.brand-title small {
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    display: block;
 }
